@@ -84,14 +84,14 @@ class Admin {
 		foreach( $post_types as $post_type ) :
 			$name    = $post_type->name;
 			$label   = $post_type->label;
-			$checked = ! empty( $settings['post_type'] ) ? in_array( $name, $settings['post_type'] ) : false;
+			$checked = ! empty( $settings ) ? in_array( $name, $settings ) : false;
 		?>
 			<div>
 				<label for="<?php echo esc_attr( 'post_types' . '_' . $name ); ?>">
 					<input
 						type="checkbox"
 						id="<?= esc_attr( 'post_types' . '_' . $name ); ?>"
-						name="nv_search_settings[post_type][]"
+						name="nv_search_settings[]"
 						value="<?php echo esc_attr( $name ); ?>"
 						<?php checked( $checked, 1, true ); ?>
 					/>
