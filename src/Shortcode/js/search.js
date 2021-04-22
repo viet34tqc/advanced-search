@@ -13,9 +13,9 @@
 		delay: 300,
 		minLength: 3,
 		source: function ( request, response ) {
-			const searchTitlesForSuggestions = cachedPostTitles => {
-				// Filter the title.
-				const suggestions = cachedPostTitles.filter( post => {
+			const searchTitlesForSuggestions = postTitles => {
+D				// Filter the title.
+				const suggestions = postTitles.filter( post => {
 					return post.title.toLowerCase().includes( request.term.toLowerCase() );
 				} );
 

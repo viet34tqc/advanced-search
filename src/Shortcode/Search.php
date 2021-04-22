@@ -52,12 +52,12 @@ class Search {
 	// Get posts from post types saved in option.
 	// And save into transient.
 	private function get_posts() {
-		$post_types = get_option( 'nv_search_settings' );
-		if ( ! $post_types ) {
-			return '';
+		$settings = get_option( 'nv_search_settings' );
+		if ( empty( $settings[ 'post_types' ] ) ) {
+			return;
 		}
 		$posts = new \WP_Query( [
-			'post_types'             => $post_types,
+			'post_types'             => $settings[ 'post_types' ],
 			'post_status'            => 'publish',
 			'posts_per_page'         => -1,
 			'no_found_rows'          => true,
@@ -103,8 +103,8 @@ class Search {
 	 */
 	public function delete_post_cache_for_post_type( $post_id, $post ) {
 		$transient_name = $this->transient['name'];
-		$post_types = get_option( 'nv_search_settings' );
-		if ( ! $post_types ) {
+		$settings = get_option( 'nv_search_settings' );
+		if ( empty( $settings[ 'post_types' ] ) ) {
 			return;
 		}
 		if ( in_array( $post->post_type, $post_types ) && get_transient( $transient_name ) ) {
