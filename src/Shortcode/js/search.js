@@ -14,7 +14,7 @@
 		minLength: 3,
 		source: function ( request, response ) {
 			const searchTitlesForSuggestions = postTitles => {
-D				// Filter the title.
+				// Filter the title.
 				const suggestions = postTitles.filter( post => {
 					return post.title.toLowerCase().includes( request.term.toLowerCase() );
 				} );
@@ -55,11 +55,12 @@ D				// Filter the title.
 
 			// on success.
 			sameAjaxRequest
-				.done( function ( data ) {
-					// data contains the post titles sent by the AJAX handler.
-					var searchSuggestions = searchTitlesForSuggestions( data );
+				.done( function ( res ) {
+					if ( res.success ) {
+						var searchSuggestions = searchTitlesForSuggestions( res.data );
+						response( searchSuggestions );
+					}
 					// return the suggestions for the search term.
-					response( searchSuggestions );
 				} )
 				// on failure.
 				.fail( function () {

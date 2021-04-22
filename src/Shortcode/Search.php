@@ -54,7 +54,7 @@ class Search {
 	private function get_posts() {
 		$settings = get_option( 'nv_search_settings' );
 		if ( empty( $settings[ 'post_types' ] ) ) {
-			return;
+			return [];
 		}
 		$posts = new \WP_Query( [
 			'post_types'             => $settings[ 'post_types' ],
